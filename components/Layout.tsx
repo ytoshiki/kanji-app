@@ -18,7 +18,6 @@ const Layout: React.FC<Props> = ({children}) => {
       </Head>
       <main>
       <MainVisual />
-      <Navigation />
       {children}
       </main>
       <footer>

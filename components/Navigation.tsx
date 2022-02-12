@@ -1,10 +1,34 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect} from 'react'
+import { gql, useQuery } from '@apollo/client';
+
+export const GET_USER = gql`
+  query GetUser {
+    user {
+      username
+      avatar,
+    }
+  }
+`;
 
 const Navigation = () => {
+
+  const {loading, error, data, refetch} = useQuery(GET_USER, {
+    fetchPolicy:"cache-and-network"
+  });
+
+  useEffect(() => {
+    console.log(error);
+  }, [])
+
+  if (loading) return <span>'Loading...'</span>;
+  if (error) return <span>`Error! ${error.message}`</span>;
+
+
   return (
     <nav>
       <ul>
+        
       <li>
           <Link href="/">
             Search
@@ -25,16 +49,21 @@ const Navigation = () => {
             About
           </Link>
         </li>
-        <li>
-          <Link href="/signin">
-            Log in
-          </Link>
-        </li>
-        <li>
-          <Link href="/signin">
+        {
+         (!data || !data.user) &&  <li>
+        <Link href="/login">
+          Log in
+        </Link>
+      </li>
+        }
+        {
+          (!data || !data.user) && <li>
+          <Link href="/signup">
             Sign up
           </Link>
         </li>
+        }
+        
       </ul>
     </nav>
   )

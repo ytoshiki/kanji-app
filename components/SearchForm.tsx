@@ -6,17 +6,17 @@ import React, { useState } from 'react'
 const SearchForm = () => {
 
 
-  const fetchResultsBySearch = async (keyword: string) => {
-    try {
+  // const fetchResultsBySearch = async (keyword: string) => {
+  //   try {
   
-      const response = await axios.get(`${process.env.KANJI_API_ROUTE}search/${keyword}`);
-      const data = response.data;
-      console.log(data);
-    } catch (error) {
+  //     const response = await axios.get(`${process.env.KANJI_API_ROUTE}search/${keyword}`);
+  //     const data = response.data;
+  //     console.log(data);
+  //   } catch (error) {
       
-    }
+  //   }
   
-  }
+  // }
 
   console.log(process.env.KANJI_API_ROUTE);
 
