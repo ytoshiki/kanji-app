@@ -6,7 +6,7 @@ import SignupForm from '../components/SignupForm';
 const Signup = () => {
   return (
     <>
-      <Navigation />
+      
       <SignupForm />
     </>
   )

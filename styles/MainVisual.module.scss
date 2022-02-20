@@ -1,0 +1,10 @@
+.main_visual {
+  &__inner {
+    display: flex;
+    justify-content: center;
+  }
+  &__logo {
+    width: 100%;
+    max-width: 4rem;
+  }
+}

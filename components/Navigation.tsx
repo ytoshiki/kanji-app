@@ -1,72 +1,57 @@
-import Link from 'next/link'
-import React, { useEffect} from 'react'
-import { gql, useQuery } from '@apollo/client';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../context/authContext";
+import { UserContext } from "../providers/refetchProvider";
 
-export const GET_USER = gql`
-  query GetUser {
-    user {
-      username
-      avatar,
-    }
-  }
-`;
+const Navigation: React.FC = () => {
+  const router = useRouter();
+  const { user, logout } = useContext(AuthContext);
 
-const Navigation = () => {
+  const logOut = () => {
+    logout();
+    router.push("/");
+  };
 
-  const {loading, error, data, refetch} = useQuery(GET_USER, {
-    fetchPolicy:"cache-and-network"
-  });
-
-  useEffect(() => {
-    console.log(error);
-  }, [])
-
-  if (loading) return <span>'Loading...'</span>;
-  if (error) return <span>`Error! ${error.message}`</span>;
-
-
+  const authNav = user ? (
+    <li>
+      <Link href="#">
+        <a onClick={logOut}>Logout</a>
+      </Link>
+    </li>
+  ) : (
+    <>
+      <li>
+        <Link href="/login">
+          <a>Log in</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/signup">
+          <a>Sign up</a>
+        </Link>
+      </li>
+    </>
+  );
   return (
     <nav>
       <ul>
-        
-      <li>
-          <Link href="/">
-            Search
-          </Link>
+        <li>
+          <Link href="/">Search</Link>
         </li>
         <li>
-          <Link href="/mylist">
-            My List
-          </Link>
+          <Link href="/mylist">My List</Link>
         </li>
         <li>
-          <Link href="/learn">
-            Learn
-          </Link>
+          <Link href="/learn">Learn</Link>
         </li>
         <li>
-          <Link href="/about">
-            About
-          </Link>
+          <Link href="/about">About</Link>
         </li>
-        {
-         (!data || !data.user) &&  <li>
-        <Link href="/login">
-          Log in
-        </Link>
-      </li>
-        }
-        {
-          (!data || !data.user) && <li>
-          <Link href="/signup">
-            Sign up
-          </Link>
-        </li>
-        }
-        
+        {authNav}
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;
