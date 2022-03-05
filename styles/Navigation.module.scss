@@ -1,0 +1,33 @@
+.navigation {
+  padding: 1rem 0;
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 1.6rem;
+  }
+
+  &__logo {
+    width: 80px;
+    display: block;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    list-style: none;
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}

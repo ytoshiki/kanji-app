@@ -1,0 +1,104 @@
+.myList {
+  &__title {
+    font-size: 22px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+    font-weight: normal;
+    margin-bottom: 1rem;
+  }
+
+  &__block {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    list-style: none;
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.6rem;
+
+    &_text {
+      margin-right: 10px;
+    }
+
+    &_options {
+      display: flex;
+      align-items: center;
+
+      div {
+        display: flex;
+        &:first-child {
+          margin-right: 12px;
+        }
+      }
+
+      input {
+        display: block;
+        margin-top: 7px;
+        margin-right: 3px;
+      }
+    }
+  }
+
+  &__button {
+    margin-bottom: 20px;
+    appearance: none;
+    background-color: #2ea44f;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  &__kanji {
+    font-size: 1.6rem;
+    position: relative;
+    display: block;
+    transition: opacity ease 0.3s;
+    padding-left: 12px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #2f6700;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

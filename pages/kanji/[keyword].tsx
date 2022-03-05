@@ -143,89 +143,91 @@ const Kanji: React.FC<Props> = ({ result }) => {
 
   if (!result) return <div>...Not Found</div>;
   return (
-    <div>
-      <button onClick={() => clickHandler(isSaved)}>
-        {isSaved ? "remove from my list" : "Add to my list"}
-      </button>
-      {
-        <Collapse in={!!responseError.message}>
-          <Alert severity="error">
-            {responseError.message}
-            <br />
-            {responseError.type === "token" && (
-              <>
-                <Link href="/signin">
-                  <a>I have an account.</a>
-                </Link>
-                <Link href="/signup">
-                  <a>Create a new account.</a>
-                </Link>
-              </>
-            )}
-          </Alert>
-        </Collapse>
-      }
-      {
-        <Collapse in={!!responseSuccess}>
-          <Alert severity="success">{responseSuccess}</Alert>
-        </Collapse>
-      }
+    <div className="g-container">
       <div>
-        <div>{result.kanji.character}</div>
+        <button onClick={() => clickHandler(isSaved)}>
+          {isSaved ? "remove from my list" : "Add to my list"}
+        </button>
+        {
+          <Collapse in={!!responseError.message}>
+            <Alert severity="error">
+              {responseError.message}
+              <br />
+              {responseError.type === "token" && (
+                <>
+                  <Link href="/signin">
+                    <a>I have an account.</a>
+                  </Link>
+                  <Link href="/signup">
+                    <a>Create a new account.</a>
+                  </Link>
+                </>
+              )}
+            </Alert>
+          </Collapse>
+        }
+        {
+          <Collapse in={!!responseSuccess}>
+            <Alert severity="success">{responseSuccess}</Alert>
+          </Collapse>
+        }
         <div>
-          <span>音読み</span>
-          {result.kanji.onyomi.katakana}
-          {result.kanji.onyomi.romaji}
+          <div>{result.kanji.character}</div>
+          <div>
+            <span>音読み</span>
+            {result.kanji.onyomi.katakana}
+            {result.kanji.onyomi.romaji}
+          </div>
+          <div>
+            <span>訓読み</span>
+            {result.kanji.kunyomi.hiragana}
+            {result.kanji.kunyomi.romaji}
+          </div>
+          <div>
+            <span>意味</span>
+            {result.kanji.meaning.english}
+          </div>
         </div>
         <div>
-          <span>訓読み</span>
-          {result.kanji.kunyomi.hiragana}
-          {result.kanji.kunyomi.romaji}
+          <ul>
+            {result.examples.length &&
+              result.examples.map((example) => {
+                return (
+                  <li key={example.japanese}>
+                    {example.japanese}
+                    {example.meaning.english}
+                    {example.audio.mp3}
+                  </li>
+                );
+              })}
+          </ul>
         </div>
         <div>
-          <span>意味</span>
-          {result.kanji.meaning.english}
-        </div>
-      </div>
-      <div>
-        <ul>
-          {result.examples.length &&
-            result.examples.map((example) => {
-              return (
-                <li key={example.japanese}>
-                  {example.japanese}
-                  {example.meaning.english}
-                  {example.audio.mp3}
-                </li>
-              );
-            })}
-        </ul>
-      </div>
-      <div>
-        {result.kanji.strokes.count}
+          {result.kanji.strokes.count}
 
-        <ul>
-          {result.kanji.strokes.images.map((image) => (
-            <li key={image}>
-              <Image src={image} width="100px" height="100px" />
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {<Image src={result.radical.image} width="100px" height="100px" />}
-        {result.radical.character}
-        {result.radical.meaning.english}
-        {result.radical.name.hiragana}
-        {result.radical.name.romaji}
-        {result.radical.strokes}
-        <ul>
-          {result.radical.animation.map((image) => (
-            <li key={image}>
-              <Image src={image} width="100px" height="100px" />
-            </li>
-          ))}
-        </ul>
+          <ul>
+            {result.kanji.strokes.images.map((image) => (
+              <li key={image}>
+                <Image src={image} width="100px" height="100px" />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          {<Image src={result.radical.image} width="100px" height="100px" />}
+          {result.radical.character}
+          {result.radical.meaning.english}
+          {result.radical.name.hiragana}
+          {result.radical.name.romaji}
+          {result.radical.strokes}
+          <ul>
+            {result.radical.animation.map((image) => (
+              <li key={image}>
+                <Image src={image} width="100px" height="100px" />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

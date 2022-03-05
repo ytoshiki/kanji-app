@@ -1,0 +1,11 @@
+.footer {
+  // background: url("../public/bg-footer.png") no-repeat center center / contain;
+  &__image {
+    width: calc(1298px / 2);
+    height: calc(568px / 2);
+    background: url("../public/img-footer.png") no-repeat center center /
+      contain;
+  }
+}
+
+// 1298 × 568

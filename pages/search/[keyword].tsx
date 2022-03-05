@@ -1,18 +1,17 @@
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import React from 'react'
-
+import axios from "axios";
+import { useRouter } from "next/router";
+import React from "react";
 
 interface SearchResult {
   kanji: {
-    character: string,
-    stroke: number
-  },
+    character: string;
+    stroke: number;
+  };
   radical: {
-    character: string,
-    stroke: number,
-    order: number
-  }
+    character: string;
+    stroke: number;
+    order: number;
+  };
 }
 
 interface Props {
@@ -20,69 +19,74 @@ interface Props {
   keyword: string;
 }
 
-const Search: React.FC<Props> = ({result, keyword}) => {
-  
+const Search: React.FC<Props> = ({ result, keyword }) => {
   const router = useRouter();
 
   const clickHandler = (keyword: string) => {
     router.push({
       pathname: `/kanji/${keyword}`,
-      query: {keyword :keyword} 
-    })
-  }
+      query: { keyword: keyword },
+    });
+  };
+
+  console.log(result);
+
   return (
-    <div>
-      <h1>{keyword}</h1>
+    <div className="g-container">
       <div>
-        <ul>
-        {
-          result?.map(data => (
-            <li key={data.kanji.character} >
-              <div>
-                <div>
-                {data.kanji.character}
-                </div>
-                <div>
-              </div>
-                <div>
-                  <span>
-                    Stroke:
-                  </span>
-                  <span>
-                  {data.kanji.stroke}
-                    </span>
-                  </div>
-              </div>
-              <button onClick={() => clickHandler(data.kanji.character)}>Learn More</button>
-            </li>
-          ))
-        }
-        </ul>
+        {!result?.length ? (
+          <div>
+            <h2>Your search terms did not match any entries. </h2>
+            <p>
+              We cannot find any entries matching <strong>{keyword}</strong>.
+              <br />
+              Please check you have typed the word correctly.
+            </p>
+          </div>
+        ) : (
+          <>
+            <p>
+              We found {result.length} {result.length > 1 ? "entries" : "entry"}{" "}
+              matching <strong>{keyword}</strong>
+            </p>
+            <ul>
+              {result?.map((data) => (
+                <li
+                  key={data.kanji.character}
+                  onClick={() => clickHandler(data.kanji.character)}
+                >
+                  <div>{data.kanji.character}</div>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export async function getServerSideProps(context: any) {
-
   const keyword = context.query.keyword;
 
-  const requestEndPoint = encodeURI(`${process.env.KANJI_API_ROUTE}search/${keyword}`);
+  const requestEndPoint = encodeURI(
+    `${process.env.KANJI_API_ROUTE}search/${keyword}`
+  );
 
   const res = await axios.get(requestEndPoint, {
     headers: {
-      'x-rapidapi-host': `${process.env.KANJI_API_HOST}`,
-    'x-rapidapi-key': `${process.env.KANJI_API_KEY}`
-    }
+      "x-rapidapi-host": `${process.env.KANJI_API_HOST}`,
+      "x-rapidapi-key": `${process.env.KANJI_API_KEY}`,
+    },
   });
 
   const result = await res.data;
 
   if (result.error) {
-    return { props: { result: null, keyword } }
+    return { props: { result: null, keyword } };
   }
 
-  return { props: { result, keyword } }
+  return { props: { result, keyword } };
 }
 
-export default Search
+export default Search;
