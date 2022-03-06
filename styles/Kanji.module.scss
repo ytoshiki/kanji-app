@@ -1,0 +1,56 @@
+.kanji {
+  &__top {
+    display: flex;
+    align-items: flex-start;
+
+    span {
+      display: block;
+    }
+  }
+  &__keyword {
+    font-size: 5rem;
+    flex: none;
+    margin-right: 80px;
+  }
+
+  &__meaning {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__info {
+    margin-top: 16px;
+
+    &_block {
+      display: flex;
+    }
+
+    &_box {
+      margin-right: 26px;
+    }
+  }
+
+  &__order {
+    display: flex;
+    flex-wrap: wrap;
+
+    &_container {
+      margin: 40px 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      padding: 2px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(204, 204, 204, 0.5);
+
+      img {
+        width: 60px !important;
+      }
+    }
+  }
+}

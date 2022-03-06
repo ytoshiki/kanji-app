@@ -6,6 +6,7 @@ import { Alert, Collapse } from "@mui/material";
 import Link from "next/link";
 import useUserList from "../../hooks/useUserList";
 import useRemoveItem from "../../hooks/useRemoveItem";
+import styles from "../../styles/Kanji.module.scss";
 
 interface Example {
   audio: {
@@ -171,41 +172,29 @@ const Kanji: React.FC<Props> = ({ result }) => {
             <Alert severity="success">{responseSuccess}</Alert>
           </Collapse>
         }
-        <div>
-          <div>{result.kanji.character}</div>
-          <div>
-            <span>音読み</span>
-            {result.kanji.onyomi.katakana}
-            {result.kanji.onyomi.romaji}
-          </div>
-          <div>
-            <span>訓読み</span>
-            {result.kanji.kunyomi.hiragana}
-            {result.kanji.kunyomi.romaji}
-          </div>
-          <div>
-            <span>意味</span>
-            {result.kanji.meaning.english}
+        <div className={styles.kanji__top}>
+          <div className={styles.kanji__keyword}>{result.kanji.character}</div>
+          <div className={styles.kanji__info}>
+            <div className={styles.kanji__meaning}>
+              {result.kanji.meaning.english}
+            </div>
+            <div className={styles.kanji__info_block}>
+              <div className={styles.kanji__info_box}>
+                <span>音読み</span>
+                {result.kanji.onyomi.katakana}
+              </div>
+              <div className={styles.kanji__info_box}>
+                <span>訓読み</span>
+                {result.kanji.kunyomi.hiragana}
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <ul>
-            {result.examples.length &&
-              result.examples.map((example) => {
-                return (
-                  <li key={example.japanese}>
-                    {example.japanese}
-                    {example.meaning.english}
-                    {example.audio.mp3}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-        <div>
+
+        <div className={styles.kanji__order_container}>
           {result.kanji.strokes.count}
 
-          <ul>
+          <ul className={styles.kanji__order}>
             {result.kanji.strokes.images.map((image) => (
               <li key={image}>
                 <Image src={image} width="100px" height="100px" />
@@ -226,6 +215,20 @@ const Kanji: React.FC<Props> = ({ result }) => {
                 <Image src={image} width="100px" height="100px" />
               </li>
             ))}
+          </ul>
+        </div>
+        <div>
+          <ul>
+            {result.examples.length &&
+              result.examples.map((example) => {
+                return (
+                  <li key={example.japanese}>
+                    {example.japanese}
+                    {example.meaning.english}
+                    {example.audio.mp3}
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </div>

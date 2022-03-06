@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React from "react";
+import styles from "../../styles/MyList.module.scss";
 
 interface SearchResult {
   kanji: {
@@ -49,13 +50,16 @@ const Search: React.FC<Props> = ({ result, keyword }) => {
               We found {result.length} {result.length > 1 ? "entries" : "entry"}{" "}
               matching <strong>{keyword}</strong>
             </p>
-            <ul>
+            <ul className={styles.myList__list}>
               {result?.map((data) => (
                 <li
+                  className={styles.myList__item}
                   key={data.kanji.character}
                   onClick={() => clickHandler(data.kanji.character)}
                 >
-                  <div>{data.kanji.character}</div>
+                  <div className={`${styles.myList__kanji}`}>
+                    {data.kanji.character}
+                  </div>
                 </li>
               ))}
             </ul>

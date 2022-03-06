@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import GradeSelect from "../../components/GradeSelect";
+import styles from "../../styles/MyList.module.scss";
 
 interface Result {
   kanji: {
@@ -33,40 +34,35 @@ const Grade: React.FC<Props> = ({ result, grade }) => {
     setResultDisplay(filteredResult);
   }, [byPage]);
 
-  const clickHandler = (keyword: string) => {
-    router.push({
-      pathname: `/kanji/${keyword}`,
-      query: { keyword: keyword },
-    });
-  };
-
   if (!result) return <div>Not Found...</div>;
 
   return (
-    <div>
-      <h1>Grade {grade} Kanji</h1>
+    <div className="g-container">
+      <h1 className={styles.myList__title}>level {grade}</h1>
       <div>
-        <ul>
+        <ul className={styles.myList__list}>
           {resultDisplay.length &&
             resultDisplay.map((data) => (
-              <li key={data.kanji.character}>
+              <li key={data.kanji.character} className={styles.myList__item}>
                 <Link href={`/kanji/${data.kanji.character}`}>
-                  <a>
-                    <div>
-                      {data.kanji.character}
-                      <span>stroke: {data.kanji.stroke}</span>
-                    </div>
+                  <a className={`${styles.myList__kanji}`}>
+                    <div>{data.kanji.character}</div>
                   </a>
                 </Link>
               </li>
             ))}
         </ul>
         {result.length > resultDisplay.length && (
-          <button onClick={() => setByPage(byPage + 50)}>Load More</button>
+          <button
+            className={`${styles.myList__load_btn}`}
+            onClick={() => setByPage(byPage + 50)}
+          >
+            LOAD MORE
+          </button>
         )}
       </div>
       <div>
-        <h3>Try another grade</h3>
+        <h3 className={styles.myList__title}>other levels</h3>
         <GradeSelect currentGrade={grade ? parseInt(grade) : null} />
       </div>
     </div>
