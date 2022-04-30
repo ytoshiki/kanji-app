@@ -33,7 +33,7 @@ const Search: React.FC<Props> = ({ result, keyword }) => {
   console.log(result);
 
   return (
-    <div className="g-container">
+    <div className="g-container l-container">
       <div>
         {!result?.length ? (
           <div>
@@ -46,10 +46,11 @@ const Search: React.FC<Props> = ({ result, keyword }) => {
           </div>
         ) : (
           <>
-            <p>
+            <h2 className={styles.myList__title}>
+              <span>&#128073;</span>
               We found {result.length} {result.length > 1 ? "entries" : "entry"}{" "}
               matching <strong>{keyword}</strong>
-            </p>
+            </h2>
             <ul className={styles.myList__list}>
               {result?.map((data) => (
                 <li

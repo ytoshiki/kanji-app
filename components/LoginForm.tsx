@@ -53,7 +53,7 @@ const SignupForm = () => {
 
   return (
     <div className={styles.form}>
-      <h2>Sign up</h2>
+      <h2>Log in</h2>
       <form onSubmit={submitHandler}>
         <div className={styles.form__block}>
           <input
@@ -86,12 +86,12 @@ const SignupForm = () => {
             <Alert severity="error">{formError}</Alert>
           </Collapse>
         }
-        <button>Signup</button>
+        <button>Login</button>
       </form>
       {
         <Collapse in={signedUpSuccess}>
           <Alert severity="success">
-            You've successfully signed up!
+            You've successfully logged in!
             <br />
             You wil leave this page automatically in 3 seconds.
           </Alert>

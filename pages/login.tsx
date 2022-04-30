@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Navigation from "../components/Navigation";
-import SignupForm from "../components/SignupForm";
+import LoginForm from "../components/LoginForm";
 
-const Signup = () => {
+const Login = () => {
   return (
     <>
       <div className="g-container l-container">
-        <SignupForm />
+        <LoginForm />
       </div>
     </>
   );
 };
 
-export default Signup;
+export default Login;

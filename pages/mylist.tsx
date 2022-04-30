@@ -89,10 +89,13 @@ const MyList = () => {
 
   return (
     <div className={styles.myList}>
-      <div className="g-container">
+      <div className="g-container l-container">
         <div>
           <div>
-            <h1 className={styles.myList__title}>My List</h1>
+            <h2 className={styles.myList__title}>
+              <span>&#128221;</span>
+              My List
+            </h2>
           </div>
 
           <div className={styles.myList__sort}>
@@ -105,7 +108,7 @@ const MyList = () => {
                 <input type="radio" value="date" name="sort" /> date
               </div>
               <div>
-                <input type="radio" value="status" name="sort" /> status
+                <input type="radio" value="status" name="sort" /> understanding
               </div>
             </form>
           </div>
@@ -124,7 +127,7 @@ const MyList = () => {
                     <li key={item.id} className={styles.myList__item}>
                       <Link href={`/kanji/${item.character}`}>
                         <a
-                          className={`${styles.myList__kanji} is-${item.status}`}
+                          className={`${styles.myList__kanji} is-${item.status} is-jp`}
                         >
                           {item.character}
                         </a>

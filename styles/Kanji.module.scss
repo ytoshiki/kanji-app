@@ -1,21 +1,73 @@
 .kanji {
+  position: relative;
+
+  &__button {
+    margin-left: auto;
+    display: block;
+    margin-bottom: 1rem;
+
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
+      sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    outline: 0;
+    padding: 10px 25px;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px 0;
+      transform: translateY(-2px);
+    }
+  }
   &__top {
     display: flex;
     align-items: flex-start;
+    margin-bottom: 3rem;
 
     span {
       display: block;
     }
   }
   &__keyword {
-    font-size: 5rem;
+    font-size: 6rem;
     flex: none;
     margin-right: 80px;
   }
 
+  &__block {
+    margin-bottom: 2rem;
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: green;
+    margin-bottom: 0.5rem;
+  }
+
+  &__text {
+    font-size: 1rem;
+  }
+
   &__meaning {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.8rem;
   }
 
   &__info {
@@ -23,10 +75,21 @@
 
     &_block {
       display: flex;
+      margin-top: 1rem;
     }
 
     &_box {
       margin-right: 26px;
+    }
+  }
+
+  &__radical {
+    margin-left: 1rem;
+
+    p {
+      &:first-child {
+        margin-bottom: 0.25rem;
+      }
     }
   }
 
@@ -52,5 +115,25 @@
         width: 60px !important;
       }
     }
+  }
+
+  &__flex {
+    display: flex;
+    align-items: flex-start;
+
+    &:not(:first-child) {
+      margin-top: 0.5rem;
+    }
+  }
+
+  &__flexSB {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__audio {
+    width: 240px;
+    margin-right: 20px;
   }
 }

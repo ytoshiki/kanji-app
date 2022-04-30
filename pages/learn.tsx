@@ -6,9 +6,12 @@ interface Props {}
 
 const Learn: React.FC<Props> = ({}) => {
   return (
-    <div className="g-container">
+    <div className="g-container l-container">
       <div>
-        <div className={styles.grade__title}>Select your kanji level</div>
+        <h2 className={styles.grade__title}>
+          <span> &#128073;</span>
+          Select your kanji level
+        </h2>
         <GradeSelect />
       </div>
     </div>

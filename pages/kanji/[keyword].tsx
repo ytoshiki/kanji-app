@@ -7,6 +7,8 @@ import Link from "next/link";
 import useUserList from "../../hooks/useUserList";
 import useRemoveItem from "../../hooks/useRemoveItem";
 import styles from "../../styles/Kanji.module.scss";
+import ReactAudioPlayer from "react-audio-player";
+import useAudio from "../../hooks/useAudio";
 
 interface Example {
   audio: {
@@ -83,7 +85,9 @@ const Kanji: React.FC<Props> = ({ result }) => {
 
     if (addToListData?.kanjiCreate.kanji.character) {
       setResponseSuccess(
-        `${addToListData.kanjiCreate.kanji.character} has successfully been added to your list!`
+        `${addToListData.kanjiCreate.kanji.character} has successfully been added to
+          My List!
+        `
       );
       refetch();
     }
@@ -120,7 +124,7 @@ const Kanji: React.FC<Props> = ({ result }) => {
 
     if (removeItemData?.kanjiDelete.kanji.character) {
       setResponseSuccess(
-        `${removeItemData.kanjiDelete.kanji.character} has successfully been removed to your list!`
+        `${removeItemData.kanjiDelete.kanji.character} has successfully been removed from My List!`
       );
       refetch();
     }
@@ -144,10 +148,13 @@ const Kanji: React.FC<Props> = ({ result }) => {
 
   if (!result) return <div>...Not Found</div>;
   return (
-    <div className="g-container">
-      <div>
-        <button onClick={() => clickHandler(isSaved)}>
-          {isSaved ? "remove from my list" : "Add to my list"}
+    <div className="g-container l-container">
+      <div className={styles.kanji}>
+        <button
+          onClick={() => clickHandler(isSaved)}
+          className={styles.kanji__button}
+        >
+          {isSaved ? "DELETE" : `Add`}
         </button>
         {
           <Collapse in={!!responseError.message}>
@@ -157,10 +164,10 @@ const Kanji: React.FC<Props> = ({ result }) => {
               {responseError.type === "token" && (
                 <>
                   <Link href="/signin">
-                    <a>I have an account.</a>
+                    <a className="is-underline">I have an account.</a>
                   </Link>
                   <Link href="/signup">
-                    <a>Create a new account.</a>
+                    <a className="is-underline">Create a new account.</a>
                   </Link>
                 </>
               )}
@@ -173,27 +180,37 @@ const Kanji: React.FC<Props> = ({ result }) => {
           </Collapse>
         }
         <div className={styles.kanji__top}>
-          <div className={styles.kanji__keyword}>{result.kanji.character}</div>
+          <div className="is-jp">
+            <h1 className={styles.kanji__keyword}>{result.kanji.character}</h1>
+          </div>
+
           <div className={styles.kanji__info}>
-            <div className={styles.kanji__meaning}>
-              {result.kanji.meaning.english}
+            <div>
+              <h2 className={styles.kanji__label}>Meaning</h2>
+              <p className={styles.kanji__text}>
+                {result.kanji.meaning.english}
+              </p>
             </div>
             <div className={styles.kanji__info_block}>
               <div className={styles.kanji__info_box}>
-                <span>音読み</span>
-                {result.kanji.onyomi.katakana}
+                <h2 className={styles.kanji__label}>Onyomi</h2>
+                <p className={styles.kanji__text}>
+                  {result.kanji.onyomi.katakana}
+                </p>
               </div>
               <div className={styles.kanji__info_box}>
-                <span>訓読み</span>
-                {result.kanji.kunyomi.hiragana}
+                <h2 className={styles.kanji__label}>Kunyomi</h2>
+                <p className={styles.kanji__text}>
+                  {result.kanji.kunyomi.hiragana}
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className={styles.kanji__order_container}>
-          {result.kanji.strokes.count}
-
+        <div className={styles.kanji__block}>
+          <h2 className={styles.kanji__label}>Strokes</h2>
+          <p>{result.kanji.strokes.count}</p>
           <ul className={styles.kanji__order}>
             {result.kanji.strokes.images.map((image) => (
               <li key={image}>
@@ -202,30 +219,30 @@ const Kanji: React.FC<Props> = ({ result }) => {
             ))}
           </ul>
         </div>
-        <div>
-          {<Image src={result.radical.image} width="100px" height="100px" />}
-          {result.radical.character}
-          {result.radical.meaning.english}
-          {result.radical.name.hiragana}
-          {result.radical.name.romaji}
-          {result.radical.strokes}
-          <ul>
-            {result.radical.animation.map((image) => (
-              <li key={image}>
-                <Image src={image} width="100px" height="100px" />
-              </li>
-            ))}
-          </ul>
+        <div className={styles.kanji__block}>
+          <h2 className={styles.kanji__label}>Radical</h2>
+          <div className={styles.kanji__flex}>
+            {<Image src={result.radical.image} width="60px" height="60px" />}
+            <div className={styles.kanji__radical}>
+              <p className="is-jp">{result.radical.name.hiragana}</p>
+              <p>{result.radical.meaning.english}</p>
+            </div>
+          </div>
         </div>
-        <div>
+        <div className={styles.kanji__block}>
+          <h2 className={styles.kanji__label}>Examples</h2>
           <ul>
             {result.examples.length &&
               result.examples.map((example) => {
                 return (
-                  <li key={example.japanese}>
-                    {example.japanese}
-                    {example.meaning.english}
-                    {example.audio.mp3}
+                  <li key={example.japanese} className={styles.kanji__flex}>
+                    <p className={styles.kanji__audio}>
+                      <b className="is-jp">{example.japanese}</b>
+                      <span>{example.meaning.english}</span>
+                    </p>
+                    <div>
+                      <ReactAudioPlayer src={example.audio.mp3} controls />
+                    </div>
                   </li>
                 );
               })}

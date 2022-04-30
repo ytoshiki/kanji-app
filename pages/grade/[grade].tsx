@@ -24,7 +24,6 @@ interface Props {
 }
 
 const Grade: React.FC<Props> = ({ result, grade }) => {
-  const router = useRouter();
   const [byPage, setByPage] = useState(50);
   const [resultDisplay, setResultDisplay] = useState<Result[]>([]);
 
@@ -37,33 +36,41 @@ const Grade: React.FC<Props> = ({ result, grade }) => {
   if (!result) return <div>Not Found...</div>;
 
   return (
-    <div className="g-container">
-      <h1 className={styles.myList__title}>level {grade}</h1>
-      <div>
-        <ul className={styles.myList__list}>
-          {resultDisplay.length &&
-            resultDisplay.map((data) => (
-              <li key={data.kanji.character} className={styles.myList__item}>
-                <Link href={`/kanji/${data.kanji.character}`}>
-                  <a className={`${styles.myList__kanji}`}>
-                    <div>{data.kanji.character}</div>
-                  </a>
-                </Link>
-              </li>
-            ))}
-        </ul>
-        {result.length > resultDisplay.length && (
-          <button
-            className={`${styles.myList__load_btn}`}
-            onClick={() => setByPage(byPage + 50)}
-          >
-            LOAD MORE
-          </button>
-        )}
-      </div>
-      <div>
-        <h3 className={styles.myList__title}>other levels</h3>
-        <GradeSelect currentGrade={grade ? parseInt(grade) : null} />
+    <div className={styles.myList}>
+      <div className="g-container l-container">
+        <h2 className={styles.myList__title}>
+          level {grade}
+          <span className={`is-grade-${grade} is-ml`}>
+            <span>&#11088;</span>
+            <span>&#11088;</span>
+            <span>&#11088;</span>
+            <span>&#11088;</span>
+            <span>&#11088;</span>
+            <span>&#11088;</span>
+          </span>
+        </h2>
+        <div>
+          <ul className={styles.myList__list}>
+            {resultDisplay.length &&
+              resultDisplay.map((data) => (
+                <li key={data.kanji.character} className={styles.myList__item}>
+                  <Link href={`/kanji/${data.kanji.character}`}>
+                    <a className={`${styles.myList__kanji}`}>
+                      <div className="is-jp">{data.kanji.character}</div>
+                    </a>
+                  </Link>
+                </li>
+              ))}
+          </ul>
+          {result.length > resultDisplay.length && (
+            <button
+              className={`${styles.myList__load_btn}`}
+              onClick={() => setByPage(byPage + 50)}
+            >
+              LOAD MORE
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

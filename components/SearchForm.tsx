@@ -1,12 +1,24 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/SearchForm.module.scss";
 
-const SearchForm = () => {
+interface Props {
+  focused: boolean;
+  setFocued: (focused: boolean) => void;
+}
+
+const SearchForm: React.FC<Props> = ({ focused, setFocued }) => {
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [focused, setFocued]);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,9 +31,14 @@ const SearchForm = () => {
 
   return (
     <div className={styles.searchForm}>
-      <div className="g-container">
-        <form className={styles.searchForm__form} onSubmit={submitHandler}>
+      <div>
+        <h2 className={styles.searchForm__heading}>
+          <span>&#128270;</span>
+          Search Kanji
+        </h2>
+        <form className={`${styles.searchForm__form}`} onSubmit={submitHandler}>
           <input
+            ref={inputRef}
             className={styles.searchForm__input}
             type="text"
             placeholder="English, Japanese, or Kanji"
@@ -30,9 +47,7 @@ const SearchForm = () => {
               setKeyword(e.target.value);
             }}
           />
-          <button className={styles.searchForm__button}>
-            <Image src="/search.png" alt="me" width="20" height="20" />
-          </button>
+          <button className={styles.searchForm__button}>Search</button>
         </form>
       </div>
     </div>

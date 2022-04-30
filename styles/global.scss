@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&family=Shippori+Mincho:wght@400;500;600;700&display=swap");
+
 .g-section {
   &.is-md {
     padding: 48px 0;
@@ -5,19 +7,123 @@
 }
 
 .g-container {
-  padding: 32px 0;
+  padding: 62px 20px 32px;
 }
 
 .g-wrapper {
   width: 90%;
   max-width: 1000px;
-  margin: 60px auto;
+  margin: 60px auto 30px;
   padding: 30px;
-  background: rgb(255, 255, 255);
-  min-height: 700px;
+
+  // background: #f7f7f7;
+  border-radius: 8px;
+  border: 1px solid #dae1e8;
+  background: #fff;
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
 }
 
 p {
-  font-size: 16px;
-  margin: 1rem 0;
+  font-size: 17px;
+
+  b,
+  span {
+    display: block;
+  }
+}
+
+.l-container {
+  width: 100%;
+  max-width: 944px;
+  margin: auto;
+}
+
+h2 > span {
+  display: inline-block;
+  margin-right: 0.75rem;
+
+  &.is-ml {
+    margin: 0 0 0 0.75rem;
+  }
+}
+
+audio {
+  width: 250px;
+  height: 40px;
+}
+
+.is-jp {
+  font-family: "Shippori Mincho", serif;
+}
+
+.g-bg-white {
+  background: #fff;
+  padding: 30px 0;
+}
+
+.c-top-page {
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.3;
+
+    span {
+      display: inline-block;
+      color: #0f2b46;
+      font-weight: bold;
+    }
+
+    a {
+      text-decoration: underline;
+      color: #4a80b5;
+    }
+  }
+
+  b.is-strong {
+    color: #0f2b46;
+  }
+}
+
+.is-grade-1 {
+  span {
+    &:not(:first-child) {
+      display: none;
+    }
+  }
+}
+
+.is-grade-2 {
+  span {
+    &:not(:first-child, &:nth-child(2)) {
+      display: none;
+    }
+  }
+}
+
+.is-grade-3 {
+  span {
+    &:not(:first-child, &:nth-child(2), &:nth-child(3)) {
+      display: none;
+    }
+  }
+}
+
+.is-grade-4 {
+  span {
+    &:first-child,
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+}
+
+.is-grade-5 {
+  span {
+    &:first-child {
+      display: none;
+    }
+  }
 }

@@ -38,24 +38,22 @@ const Navigation: React.FC = () => {
   return (
     <nav className={styles.navigation}>
       <div className={styles.navigation__inner}>
-        <div>
+        <h1>
           <Link href="/">
             <a className={styles.navigation__logo}>
               <div>
-                <Image src={Logo} />
+                <span> &#127759;</span>
+                Kanji Learning
               </div>
             </a>
           </Link>
-        </div>
+        </h1>
         <ul className={styles.navigation__nav}>
           <li className={styles.navigation__item}>
             <Link href="/mylist">My List</Link>
           </li>
           <li className={styles.navigation__item}>
             <Link href="/learn">Learn</Link>
-          </li>
-          <li className={styles.navigation__item}>
-            <Link href="/about">About</Link>
           </li>
           {authNav}
         </ul>
