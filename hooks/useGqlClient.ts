@@ -6,7 +6,7 @@ export default () => {
   const [token, setToken] = useState<null | string>(null);
 
   const httpLink = createHttpLink({
-    uri: `https://kanji-app-server.vercel.app/`,
+    uri: `https://kanji-app-server.vercel.app/graphql`,
   });
 
   const authLink = setContext((_, { headers }) => {
