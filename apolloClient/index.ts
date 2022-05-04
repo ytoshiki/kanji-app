@@ -1,8 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-console.log(process.env.GQL_SERVER);
-
 const httpLink = createHttpLink({
   uri: `https://kanji-app-server.vercel.app/graphql`,
 });

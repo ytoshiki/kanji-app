@@ -31,8 +31,6 @@ const Search: React.FC<Props> = ({ result, keyword }) => {
     });
   };
 
-  console.log(result);
-
   return (
     <div className="g-container l-container">
       <div>
@@ -42,7 +40,7 @@ const Search: React.FC<Props> = ({ result, keyword }) => {
             <p>
               We cannot find any entries matching <strong>{keyword}</strong>.
               <br />
-              Please check you have typed the word correctly.{" "}
+              Please check you have typed the word correctly.
               <Link href="/">
                 <a>Try again</a>
               </Link>

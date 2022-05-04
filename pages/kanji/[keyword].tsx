@@ -8,7 +8,7 @@ import useUserList from "../../hooks/useUserList";
 import useRemoveItem from "../../hooks/useRemoveItem";
 import styles from "../../styles/Kanji.module.scss";
 import ReactAudioPlayer from "react-audio-player";
-import useAudio from "../../hooks/useAudio";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 interface Example {
   audio: {
@@ -253,11 +253,45 @@ const Kanji: React.FC<Props> = ({ result }) => {
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const keyword = context.query.keyword;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const requestEndPoint = `${process.env.KANJI_API_ROUTE}kanji/all/`;
+
+  const res = await axios.get(requestEndPoint, {
+    headers: {
+      "x-rapidapi-host": `${process.env.KANJI_API_HOST}`,
+      "x-rapidapi-key": `${process.env.KANJI_API_KEY}`,
+    },
+  });
+
+  const result = res.data;
+
+  return {
+    paths: result.map(
+      (data: {
+        kanji: {
+          character: string;
+        };
+      }) => ({
+        params: {
+          keyword: data.kanji.character.toString(),
+        },
+      })
+    ),
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  if (!params) {
+    return {
+      props: {
+        result: null,
+      },
+    };
+  }
 
   const requestEndPoint = encodeURI(
-    `${process.env.KANJI_API_ROUTE}kanji/${keyword}`
+    `${process.env.KANJI_API_ROUTE}kanji/${params.keyword}`
   );
 
   const res = await axios.get(requestEndPoint, {
@@ -270,10 +304,10 @@ export async function getServerSideProps(context: any) {
   const result = await res.data;
 
   if (result.error) {
-    return { props: { result: null, keyword } };
+    return { props: { result: null, keyword: params.keyword } };
   }
 
-  return { props: { result, keyword } };
-}
+  return { props: { result, ketword: params.keyword } };
+};
 
 export default Kanji;
