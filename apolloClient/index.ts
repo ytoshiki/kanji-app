@@ -1,19 +1,20 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+console.log(process.env.GQL_SERVER);
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/"
-})
+  uri: `https://kanji-app-server.vercel.app`,
+});
 
-const authLink = setContext((_, {headers}) => { 
+const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: localStorage.getItem("kanji-gql-token") || ""
-    }
-  }
-})
+      authorization: localStorage.getItem("kanji-gql-token") || "",
+    },
+  };
+});
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
