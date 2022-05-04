@@ -5,11 +5,23 @@
     padding-bottom: 10px;
     font-weight: normal;
     margin-bottom: 1rem;
+
+    @media only screen and (max-width: 640px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__block {
     &:not(:last-child) {
       margin-bottom: 20px;
+    }
+
+    & > div {
+      margin-bottom: 0.75rem;
+      @media only screen and (max-width: 640px) {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
     }
   }
 
@@ -21,8 +33,13 @@
   &__item {
     list-style: none;
     margin-bottom: 8px;
+
     &:not(:last-child) {
       margin-right: 30px;
+
+      @media only screen and (max-width: 640px) {
+        margin-right: 20px;
+      }
     }
   }
 
@@ -31,8 +48,16 @@
     align-items: center;
     margin-bottom: 1.6rem;
 
+    @media only screen and (max-width: 640px) {
+      margin-bottom: 1rem;
+    }
+
     &_text {
       margin-right: 10px;
+
+      @media only screen and (max-width: 640px) {
+        font-size: 1rem;
+      }
     }
 
     &_options {
@@ -41,6 +66,9 @@
 
       div {
         display: flex;
+        @media only screen and (max-width: 640px) {
+          font-size: 1rem;
+        }
         &:first-child {
           margin-right: 12px;
         }
@@ -50,6 +78,10 @@
         display: block;
         margin-top: 7px;
         margin-right: 3px;
+
+        @media only screen and (max-width: 640px) {
+          margin-top: 4px;
+        }
       }
     }
   }
@@ -135,6 +167,11 @@
     padding-left: 12px;
     cursor: pointer;
 
+    @media only screen and (max-width: 640px) {
+      font-size: 1.4rem;
+      padding-left: 10px;
+    }
+
     &::after {
       content: "";
       position: absolute;
@@ -144,6 +181,11 @@
       height: 5px;
       border-radius: 50%;
       background: #2f6700;
+
+      @media only screen and (max-width: 640px) {
+        width: 4px;
+        height: 4px;
+      }
     }
 
     &:hover {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../styles/MyList.module.scss";
@@ -36,12 +37,15 @@ const Search: React.FC<Props> = ({ result, keyword }) => {
     <div className="g-container l-container">
       <div>
         {!result?.length ? (
-          <div>
+          <div className="is-error">
             <h2>Your search terms did not match any entries. </h2>
             <p>
               We cannot find any entries matching <strong>{keyword}</strong>.
               <br />
-              Please check you have typed the word correctly.
+              Please check you have typed the word correctly.{" "}
+              <Link href="/">
+                <a>Try again</a>
+              </Link>
             </p>
           </div>
         ) : (

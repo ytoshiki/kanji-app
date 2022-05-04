@@ -12,6 +12,11 @@
     max-width: 1000px;
     margin: auto;
     padding: 0 1.6rem;
+
+    @media only screen and (max-width: 640px) {
+      padding: 0 0.75rem;
+      display: block;
+    }
   }
 
   &__logo {
@@ -20,6 +25,10 @@
     text-decoration: none;
     font-size: 2rem;
     color: #0f2b46;
+
+    @media only screen and (max-width: 640px) {
+      font-size: 1.4rem;
+    }
 
     span {
       display: inline-block;
@@ -31,17 +40,31 @@
     display: flex;
     align-items: center;
     padding-bottom: 0.25rem;
+
+    @media only screen and (max-width: 640px) {
+      padding-bottom: 0;
+      margin-top: 1rem;
+      justify-content: center;
+    }
   }
 
   &__item {
     list-style: none;
     &:not(:last-child) {
       margin-right: 1rem;
+
+      @media only screen and (max-width: 640px) {
+        margin-right: 1rem;
+      }
     }
 
     a {
       color: #4a80b5;
       text-decoration: underline;
+
+      @media only screen and (max-width: 640px) {
+        font-size: 1rem;
+      }
     }
   }
 }

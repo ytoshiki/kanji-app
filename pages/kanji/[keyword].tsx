@@ -53,7 +53,8 @@ const errorTypes = {
 
 const Kanji: React.FC<Props> = ({ result }) => {
   const { getUserList, userListData, refetch } = useUserList();
-  const [addToList, { data: addToListData }] = useAddToList();
+  const [addToList, { data: addToListData, loading: addToListLoading }] =
+    useAddToList();
   const [removeItem, { data: removeItemData }] = useRemoveItem();
   const [responseError, setResponseError] = useState({ type: "", message: "" });
   const [responseSuccess, setResponseSuccess] = useState("");
@@ -67,7 +68,6 @@ const Kanji: React.FC<Props> = ({ result }) => {
 
   useEffect(() => {
     if (addToListData?.kanjiCreate.kanjiErrors.length) {
-      console.log(addToListData.kanjiCreate.kanjiErrors);
       if (
         addToListData.kanjiCreate.kanjiErrors[0].message === errorTypes.token
       ) {
@@ -163,7 +163,7 @@ const Kanji: React.FC<Props> = ({ result }) => {
               <br />
               {responseError.type === "token" && (
                 <>
-                  <Link href="/signin">
+                  <Link href="/login">
                     <a className="is-underline">I have an account.</a>
                   </Link>
                   <Link href="/signup">
@@ -235,7 +235,7 @@ const Kanji: React.FC<Props> = ({ result }) => {
             {result.examples.length &&
               result.examples.map((example) => {
                 return (
-                  <li key={example.japanese} className={styles.kanji__flex}>
+                  <li key={example.japanese} className={styles.kanji__flexSP}>
                     <p className={styles.kanji__audio}>
                       <b className="is-jp">{example.japanese}</b>
                       <span>{example.meaning.english}</span>

@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <div>
         <section>
-          <div className="g-wrapper">
+          <div className="g-wrapper is-sm">
             <SearchForm focused={focused} setFocued={setFocused} />
           </div>
         </section>

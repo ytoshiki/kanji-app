@@ -5,6 +5,10 @@
     padding-bottom: 10px;
     font-weight: normal;
     margin-bottom: 1rem;
+
+    @media only screen and (max-width: 640px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__list {
@@ -14,6 +18,10 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
+
+    @media only screen and (max-width: 640px) {
+      margin-top: 24px;
+    }
   }
 
   &__item {
@@ -25,8 +33,24 @@
     align-items: center;
     justify-content: center;
 
+    @media only screen and (max-width: 640px) {
+      width: calc(50% - 8px);
+      margin-bottom: 16px;
+      height: 48px;
+    }
+
     &:not(:nth-child(3n + 1)) {
       margin-left: 18px;
+
+      @media only screen and (max-width: 640px) {
+        margin-left: 0;
+      }
+    }
+
+    &:nth-child(2n) {
+      @media only screen and (max-width: 640px) {
+        margin-left: 16px;
+      }
     }
 
     a {
@@ -53,6 +77,10 @@
       text-decoration: none;
       transition: all 250ms;
       user-select: none;
+
+      @media only screen and (max-width: 640px) {
+        font-size: 0.9rem;
+      }
     }
 
     a:hover,

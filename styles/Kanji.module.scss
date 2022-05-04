@@ -27,6 +27,12 @@
     -webkit-user-select: none;
     touch-action: manipulation;
 
+    @media only screen and (max-width: 640px) {
+      padding: 8px 14px;
+      font-size: 14px;
+      margin-bottom: 0.75rem;
+    }
+
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px 0;
       transform: translateY(-2px);
@@ -37,6 +43,9 @@
     align-items: flex-start;
     margin-bottom: 3rem;
 
+    @media only screen and (max-width: 640px) {
+      margin-bottom: 1.6rem;
+    }
     span {
       display: block;
     }
@@ -45,10 +54,19 @@
     font-size: 6rem;
     flex: none;
     margin-right: 80px;
+
+    @media only screen and (max-width: 640px) {
+      font-size: 4.4rem;
+      margin-right: 32px;
+    }
   }
 
   &__block {
     margin-bottom: 2rem;
+
+    @media only screen and (max-width: 640px) {
+      margin-bottom: 1.6rem;
+    }
 
     p {
       margin-bottom: 1rem;
@@ -126,14 +144,28 @@
     }
   }
 
-  &__flexSB {
+  &__flexSP {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: flex-start;
+
+    @media only screen and (max-width: 640px) {
+      display: block;
+    }
+
+    &:not(:first-child) {
+      @media only screen and (max-width: 640px) {
+        margin-top: 1rem;
+      }
+    }
   }
 
   &__audio {
     width: 240px;
     margin-right: 20px;
+
+    @media only screen and (max-width: 640px) {
+      margin: 0;
+      margin-bottom: 0.5rem !important;
+    }
   }
 }

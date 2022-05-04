@@ -4,12 +4,13 @@ import useSignupMutation from "../hooks/useSignupMutation";
 import { AuthContext } from "../context/authContext";
 import { useRouter } from "next/router";
 import styles from "../styles/form.module.scss";
+import useLoginMutation from "../hooks/useLoginMutation";
 
-const SignupForm = () => {
+const LoginForm = () => {
   const router = useRouter();
   const context = useContext(AuthContext);
-  const [signup] = useSignupMutation();
-  const [signedUpSuccess, setSignedUpSuccess] = useState(false);
+  const [login] = useLoginMutation();
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -18,8 +19,11 @@ const SignupForm = () => {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (loginSuccess) return;
+
     setFormError("");
-    setSignedUpSuccess(false);
+    setLoginSuccess(false);
 
     const { username, password } = form;
 
@@ -30,22 +34,27 @@ const SignupForm = () => {
     if (password.length < 6)
       return setFormError("At least 6 characters are required for password");
 
-    signup({
+    login({
       variables: {
         username: form.username.trim(),
         password: form.password.trim(),
       },
       update(proxy, { data }) {
-        if (data.signup) {
-          if (data.signup.userErrors.length) {
-            return setFormError(data.signup.userErrors[0].message);
+        console.log(data);
+        if (data.signin) {
+          if (data.signin.userErrors.length) {
+            return setFormError(data.signin.userErrors[0].message);
           }
 
-          setSignedUpSuccess(true);
-          context.login(data.signup.token);
+          setLoginSuccess(true);
+          context.login(data.signin.token);
           setTimeout(() => {
             router.push("/");
           }, 3000);
+        } else {
+          setFormError(
+            "Something went wrong. Make sure both your username and password are correct."
+          );
         }
       },
     });
@@ -89,7 +98,7 @@ const SignupForm = () => {
         <button>Login</button>
       </form>
       {
-        <Collapse in={signedUpSuccess}>
+        <Collapse in={loginSuccess}>
           <Alert severity="success">
             You've successfully logged in!
             <br />
@@ -101,4 +110,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginForm;
